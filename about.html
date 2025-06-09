@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Wor - Green Job Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif; /* Changed font to Inter as per instructions */
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: background 0.5s ease; /* Smooth background transition */
+        }
+
+        /* Dynamic background colors for steps */
+        body.step-1-bg {
+            background: linear-gradient(135deg, #0a5c36, #1e8449, #27ae60); /* Green theme */
+        }
+        body.step-2-bg {
+            background: linear-gradient(135deg, #1f618d, #2e86c1, #3498db); /* Blue theme */
+        }
+        body.step-3-bg {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6, #a569bd); /* Purple theme */
+        }
+        body.step-4-bg {
+            background: linear-gradient(135deg, #d35400, #e67e22, #f39c12); /* Orange theme */
+        }
+
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(to bottom right, #0a5c36, #27ae60);
+            color: white;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .logo-section {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-section img {
+            max-width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo-section .leaf-icon {
+            font-size: 3.5rem;
+            color: #f1c40f;
+            margin-bottom: 10px;
+        }
+
+        .right-panel {
+            flex: 1.2;
+            padding: 50px;
+            overflow-y: auto; /* Enable scrolling for sector details */
+            max-height: 80vh; /* Limit height to prevent overflow on smaller screens */
+        }
+
+        .app-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #f1c40f;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .app-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .features {
+            list-style-type: none;
+            margin: 30px 0;
+        }
+
+        .features li {
+            padding: 12px 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .features i {
+            margin-right: 15px;
+            font-size: 1.4rem;
+            color: #f1c40f;
+        }
+
+        .sectors-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .sector-button { /* New class for clickable sector buttons */
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white; /* Ensure text is visible */
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Space between icon and text */
+        }
+
+        .sector-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .sector-button i { /* Style for icons within sector buttons */
+            font-size: 1.1rem;
+            color: #f1c40f; /* Yellow accent for icons */
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-title {
+            font-size: 2rem;
+            color: #0a5c36;
+            margin-bottom: 10px;
+        }
+
+        .form-subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .password-toggle-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+            cursor: pointer;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #27ae60;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
+        }
+
+        .password-strength {
+            height: 5px;
+            background: #eee;
+            border-radius: 5px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .strength-meter {
+            height: 100%;
+            width: 0;
+            background: #e74c3c;
+            transition: width 0.3s;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #0a5c36, #27ae60);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px; /* Added for spacing between buttons */
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, #27ae60, #0a5c36);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(10, 92, 54, 0.3);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #0a5c36;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer; /* Indicate it's clickable */
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #ddd;
+            z-index: 1;
+        }
+
+        .step {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step.active {
+            background: #0a5c36;
+        }
+
+        .step.completed {
+            background: #27ae60;
+        }
+
+        .step-label {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .gender-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .gender-option {
+            flex: 1;
+        }
+
+        .gender-option input {
+            display: none;
+        }
+
+        .gender-option label {
+            display: block;
+            padding: 12px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .gender-option input:checked + label {
+            background: #0a5c36;
+            color: white;
+        }
+
+        .payment-options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .payment-method-details { /* Renamed for clarity */
+            display: none;
+        }
+
+        .payment-method-details.active {
+            display: block;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-option:hover {
+            border-color: #0a5c36;
+        }
+
+        .payment-option input {
+            margin-right: 15px;
+        }
+
+        .payment-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: #0a5c36;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Sector Details Specific Styles */
+        .sector-detail-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border: 1px solid #eee;
+        }
+
+        .sector-detail-section h3 {
+            color: #0a5c36;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .sector-detail-section ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .sector-detail-section p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Modal Styles for Login */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            position: relative;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #888;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            color: #0a5c36;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .left-panel, .right-panel {
+                padding: 30px;
+            }
+            
+            .gender-options {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .right-panel {
+                max-height: unset; /* Remove max-height for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body class="step-1-bg">
+    <div class="container">
+        <div class="left-panel">
+            <div class="logo-section">
+                <!-- Public Seal of Kenya -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Public_Seal_of_Kenya.svg/1200px-Public_Seal_of_Kenya.svg.png" alt="Public Seal of Kenya" onerror="this.onerror=null; this.src='https://placehold.co/80x80/0a5c36/ffffff?text=Kenya+Seal'">
+                <!-- Green Leaf Logo -->
+                <i class="fas fa-leaf leaf-icon"></i>
+            </div>
+            <h1 class="app-title">Climate Works</h1>
+            <p class="app-subtitle">Connecting youth with government job opportunities in environmental sectors</p>
+            
+            <ul class="features">
+                <li><i class="fas fa-check-circle"></i> Find job opportunities in growing sectors</li>
+                <li><i class="fas fa-check-circle"></i> Contribute to national development projects</li>
+                <li><i class="fas fa-check-circle"></i> Gain valuable work experience</li>
+                <li><i class="fas fa-check-circle"></i> Receive fair compensation and benefits</li>
+                <li><i class="fas fa-check-circle"></i> Access training and skill development</li>
+            </ul>
+            
+            <h3>Available Sectors:</h3>
+            <div class="sectors-list">
+                <button type="button" class="sector-button" data-sector-key="housing">
+                    <i class="fas fa-building"></i> Housing Development
+                </button>
+                <button type="button" class="sector-button" data-sector-key="road">
+                    <i class="fas fa-road"></i> Road Infrastructure
+                </button>
+                <button type="button" class="sector-button" data-sector-key="environment">
+                    <i class="fas fa-tree"></i> Environment Conservation
+                </button>
+                <button type="button" class="sector-button" data-sector-key="urban">
+                    <i class="fas fa-city"></i> Urban Renewal
+                </button>
+                <button type="button" class="sector-button" data-sector-key="public">
+                    <i class="fas fa-hard-hat"></i> Public Works
+                </button>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <div class="form-container">
+                <div class="progress-steps">
+                    <div class="step active" id="step1">1</div>
+                    <div class="step" id="step2">2</div>
+                    <div class="step" id="step3">3</div>
+                    <div class="step" id="step4">4</div> <!-- Added step 4 for sector details -->
+                </div>
+                
+                <!-- Step 1: Personal Information -->
+                <div id="personalInfoStep">
+                    <h2 class="form-title">Create Account</h2>
+                    <p class="form-subtitle">Join thousands of youth finding meaningful work</p>
+                    
+                    <form id="signupForm">
+                        <div class="form-group">
+                            <label for="officialName">Official Names</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" class="form-control" id="officialName" placeholder="Enter your full name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <div class="gender-options">
+                                <div class="gender-option">
+                                    <input type="radio" id="male" name="gender" value="male" required>
+                                    <label for="male">Male</label>
+                                </div>
+                                <div class="gender-option">
+                                    <input type="radio" id="female" name="gender" value="female">
+                                    <label for="female">Female</label>
+                                </div>
+                                <div class="gender-option">
+                                    <input type="radio" id="other" name="gender" value="other">
+                                    <label for="other">Other</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="idNumber">National ID Number</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-id-card"></i>
+                                <input type="text" class="form-control" id="idNumber" placeholder="Enter your ID number" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Safaricom Phone Number (Start with 254)</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-phone"></i>
+                                <input type="tel" class="form-control" id="phone" placeholder="2547XXXXXXXX" pattern="254[0-9]{9}" required>
+                            </div>
+                            <small class="text-muted">Only Safaricom numbers allowed (format: 2547XXXXXXXX)</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" class="form-control" id="password" placeholder="Create a password" required>
+                                <i class="fas fa-eye password-toggle-icon" id="togglePassword"></i>
+                            </div>
+                            <div class="password-strength">
+                                <div class="strength-meter" id="passwordStrength"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                                <i class="fas fa-eye password-toggle-icon" id="toggleConfirmPassword"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sector">Preferred Sector</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-briefcase"></i>
+                                <select class="form-control" id="sector" required>
+                                    <option value="">Select your preferred sector</option>
+                                    <option value="housing">Housing Development</option>
+                                    <option value="road">Road Infrastructure</option>
+                                    <option value="environment">Environment Conservation</option>
+                                    <option value="urban">Urban Renewal</option>
+                                    <option value="public">Public Works</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn" id="nextBtn1">Next</button>
+                    </form>
+                </div>
+                
+                <!-- Step 2: Location Information -->
+                <div id="locationStep" class="hidden">
+                    <h2 class="form-title">Location Details</h2>
+                    <p class="form-subtitle">Please provide your location information</p>
+                    
+                    <div class="form-group">
+                        <label for="county">County</label>
+                        <select class="form-control" id="county" required>
+                            <option value="">Select your county</option>
+                            <option value="nairobi">Nairobi</option>
+                            <option value="mombasa">Mombasa</option>
+                            <option value="kisumu">Kisumu</option>
+                            <option value="nakuru">Nakuru</option>
+                            <option value="kiambu">Kiambu</option>
+                            <!-- Add more counties as needed -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="constituency">Constituency</label>
+                        <select class="form-control" id="constituency" required>
+                            <option value="">Select your constituency</option>
+                            <!-- Options will be populated based on county selection -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ward">Ward</label>
+                        <select class="form-control" id="ward" required>
+                            <option value="">Select your ward</option>
+                            <!-- Options will be populated based on constituency selection -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="button" class="btn" id="backBtn1">Back</button>
+                        <button type="button" class="btn" id="nextBtn2">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Payment Information -->
+                <div id="paymentStep" class="hidden">
+                    <h2 class="form-title">Payment Method</h2>
+                    <p class="form-subtitle">Select your preferred payment method</p>
+                    
+                    <div class="form-group">
+                        <label>Choose Payment Method</label>
+                        <div class="payment-options-container">
+                            <div class="payment-option" id="mpesaOption">
+                                <input type="radio" name="paymentMethod" id="mpesa" value="mpesa" checked>
+                                <i class="fas fa-mobile-alt payment-icon"></i>
+                                <div>
+                                    <h4>M-Pesa</h4>
+                                    <p>Receive payments via M-Pesa</p>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-option" id="kcbOption">
+                                <input type="radio" name="paymentMethod" id="kcb" value="kcb">
+                                <i class="fas fa-university payment-icon"></i>
+                                <div>
+                                    <h4>KCB Bank</h4>
+                                    <p>Receive payments to your KCB account</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-method-details active" id="mpesaMethod">
+                        <div class="form-group">
+                            <label for="mpesaNumber">M-Pesa Number</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                                <input type="tel" class="form-control" id="mpesaNumber" placeholder="2547XXXXXXXX" pattern="254[0-9]{9}" required>
+                            </div>
+                            <small class="text-muted">Enter your Safaricom M-Pesa number</small>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-method-details" id="kcbMethod">
+                        <div class="form-group">
+                            <label for="accountNumber">KCB Account Number</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-credit-card"></i>
+                                <input type="text" class="form-control" id="accountNumber" placeholder="Enter your KCB account number" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="accountName">Account Name</label>
+                            <input type="text" class="form-control" id="accountName" placeholder="Name as it appears in bank records" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="branch">Branch Name</label>
+                            <input type="text" class="form-control" id="branch" placeholder="Branch where account is held" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="button" class="btn" id="backBtn2">Back</button>
+                        <button type="button" class="btn" id="nextBtn3">Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Sector Details -->
+                <div id="sectorDetailsStep" class="hidden">
+                    <h2 class="form-title">Explore Your Sector</h2>
+                    <p class="form-subtitle">Learn more about the opportunities in your chosen field.</p>
+                    
+                    <div id="selectedSectorDisplay">
+                        <!-- Sector details will be dynamically loaded here -->
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="btn" id="backBtn4">Back to Form</button> <!-- Changed ID and text for clarity -->
+                        <button type="submit" class="btn" id="submitBtn">Submit Application</button>
+                    </div>
+                </div>
+                
+                <div class="login-link">
+                    Already have an account? <a href="#" id="loginLink">Log in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="closeModal">&times;</button>
+            <h2 class="modal-title">Log In</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
+                        <i class="fas fa-eye password-toggle-icon" id="toggleLoginPassword"></i>
+                    </div>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <div class="login-link">
+                    <a href="#">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        // Data for sector details
+        const sectorData = {
+            housing: {
+                name: "Housing Development",
+                icon: "fas fa-building",
+                entails: "Focuses on planning, designing, constructing, and managing residential properties, including affordable housing initiatives. This sector plays a crucial role in urban planning and providing basic necessities.",
+                howItWorks: "Projects typically involve land acquisition, architectural design, securing financing, construction, and property management. It often collaborates with government agencies, private developers, and community organizations.",
+                trainings: [
+                    "Construction Management (Diploma/Certificate)",
+                    "Civil Engineering (Degree/Diploma)",
+                    "Architecture (Degree/Diploma)",
+                    "Quantity Surveying (Degree/Diploma)",
+                    "Plumbing & Electrical Installation (Vocational Training)",
+                    "Sustainable Building Practices (Short Course)"
+                ],
+                facts: [
+                    "Contributes significantly to national GDP.",
+                    "High demand for skilled labor and tradespeople.",
+                    "Innovations include green building technologies and prefabrication.",
+                    "Government aims to deliver affordable housing units as a key agenda."
+                ],
+                benefits: [
+                    "Stable job opportunities due to continuous demand.",
+                    "Opportunity to contribute to national development.",
+                    "Diverse career paths from skilled labor to management.",
+                    "Potential for entrepreneurship in construction services."
+                ]
+            },
+            road: {
+                name: "Road Infrastructure",
+                icon: "fas fa-road",
+                entails: "Involves the construction, maintenance, and upgrade of roads, bridges, and related transport networks. This is vital for economic development and connectivity.",
+                howItWorks: "Projects involve planning, design, land surveying, material procurement, construction (grading, paving, drainage), and ongoing maintenance. Public-private partnerships are common.",
+                trainings: [
+                    "Civil Engineering (Degree/Diploma)",
+                    "Road Construction & Maintenance (Certificate)",
+                    "Heavy Equipment Operation (Vocational Training)",
+                    "Land Surveying (Diploma/Certificate)",
+                    "Project Management (Certificate)"
+                ],
+                facts: [
+                    "Key driver of economic growth and trade.",
+                    "Large-scale government investments in infrastructure projects.",
+                    "Focus on improving rural access and urban mobility.",
+                    "Adoption of modern road construction techniques."
+                ],
+                benefits: [
+                    "Impactful work improving connectivity and trade.",
+                    "Opportunities for large-scale project involvement.",
+                    "Skill development in heavy machinery and civil works.",
+                    "Good prospects for career progression in engineering roles."
+                ]
+            },
+            environment: {
+                name: "Environment Conservation",
+                icon: "fas fa-tree",
+                entails: "Focuses on protecting natural resources, biodiversity, and ecosystems through sustainable practices, policy development, and community engagement.",
+                howItWorks: "Activities include reforestation, wildlife management, waste management, pollution control, environmental impact assessments, and climate change adaptation/mitigation projects. Often involves fieldwork and community outreach.",
+                trainings: [
+                    "Environmental Science (Degree/Diploma)",
+                    "Wildlife Management (Degree/Diploma)",
+                    "Forestry (Degree/Diploma)",
+                    "Waste Management & Recycling (Certificate)",
+                    "Climate Change Adaptation (Short Course)"
+                ],
+                facts: [
+                    "Growing global and national emphasis on sustainability.",
+                    "Crucial for addressing climate change and resource depletion.",
+                    "Involves a mix of scientific research and practical conservation efforts.",
+                    "Opportunities in NGOs, government agencies, and research institutions."
+                ],
+                benefits: [
+                    "Direct positive impact on environmental health.",
+                    "Work in diverse natural settings.",
+                    "Develop expertise in critical global issues.",
+                    "Potential for advocacy and policy influence."
+                ]
+            },
+            urban: {
+                name: "Urban Renewal",
+                icon: "fas fa-city",
+                entails: "Revitalizing and redeveloping existing urban areas to improve infrastructure, public spaces, housing, and economic opportunities.",
+                howItWorks: "Involves master planning, demolition/reconstruction, infrastructure upgrades (water, sewage, electricity), public transport integration, and community development. Requires collaboration between government, private sector, and local communities.",
+                trainings: [
+                    "Urban Planning (Degree/Diploma)",
+                    "Architecture (Degree/Diploma)",
+                    "Sociology/Community Development (Degree/Diploma)",
+                    "Real Estate Management (Diploma/Certificate)",
+                    "GIS and Remote Sensing (Short Course)"
+                ],
+                facts: [
+                    "Addresses challenges of rapid urbanization.",
+                    "Aims to create sustainable, livable cities.",
+                    "Often involves significant public and private investment.",
+                    "Focus on smart city initiatives and integrated planning."
+                ],
+                benefits: [
+                    "Shape the future of cities and communities.",
+                    "Work on interdisciplinary projects.",
+                    "Contribute to improved quality of life for urban residents.",
+                    "High demand for skilled professionals in planning and development."
+                ]
+            },
+            public: {
+                name: "Public Works",
+                icon: "fas fa-hard-hat",
+                entails: "Encompasses the design, construction, and maintenance of public infrastructure and facilities, including water systems, sanitation, public buildings, and civic amenities.",
+                howItWorks: "Managed by government departments and agencies, involving procurement, project oversight, quality control, and public service delivery. Focuses on ensuring essential services and facilities for the populace.",
+                trainings: [
+                    "Civil Engineering (Degree/Diploma)",
+                    "Water and Sanitation Engineering (Degree/Diploma)",
+                    "Construction Technology (Diploma/Certificate)",
+                    "Procurement and Logistics (Certificate)",
+                    "Public Administration (Degree)"
+                ],
+                facts: [
+                    "Foundation of national development and quality of life.",
+                    "Stable sector with continuous demand for projects.",
+                    "Directly impacts daily lives of citizens.",
+                    "Opportunities in various government ministries and parastatals."
+                ],
+                benefits: [
+                    "Serve the public and contribute directly to community well-being.",
+                    "Job stability within government structures.",
+                    "Diverse roles from engineering to administrative support.",
+                    "Opportunities for long-term career in public service."
+                ]
+            }
+        };
+
+        // DOM elements
+        const personalInfoStep = document.getElementById('personalInfoStep');
+        const locationStep = document.getElementById('locationStep');
+        const paymentStep = document.getElementById('paymentStep');
+        const sectorDetailsStep = document.getElementById('sectorDetailsStep'); // New step for sector details
+
+        const steps = [
+            { id: 'step1', element: personalInfoStep, bodyClass: 'step-1-bg' },
+            { id: 'step2', element: locationStep, bodyClass: 'step-2-bg' },
+            { id: 'step3', element: paymentStep, bodyClass: 'step-3-bg' },
+            { id: 'step4', element: sectorDetailsStep, bodyClass: 'step-4-bg' } // Added step 4
+        ];
+        let currentActiveFormStepIndex = 0; // Tracks the current step within the linear form flow (1,2,3)
+        let currentlyDisplayedStepElement = steps[0].element; // Tracks the currently visible step element (can be step 4)
+
+        // Get progress bar step elements
+        const progressStepsElements = steps.map(step => document.getElementById(step.id));
+
+        // Function to update progress bar and body background
+        function updateProgressBar(activeStepIdx, markCompletedUpTo = -1) {
+            progressStepsElements.forEach((stepEl, index) => {
+                stepEl.classList.remove('active', 'completed'); // Reset all
+                if (index === activeStepIdx) {
+                    stepEl.classList.add('active');
+                }
+                if (index < activeStepIdx || index <= markCompletedUpTo) {
+                    stepEl.classList.add('completed');
+                }
+            });
+            // Update body background only if it's a form step
+            if (activeStepIdx >= 0 && activeStepIdx < steps.length) {
+                document.body.className = steps[activeStepIdx].bodyClass;
+            }
+        }
+
+        // Function to navigate to a specific step
+        function goToStep(stepIndex, isFromFormFlow = true) {
+            currentlyDisplayedStepElement.classList.add('hidden'); // Hide current element
+
+            if (isFromFormFlow) {
+                currentActiveFormStepIndex = stepIndex; // Update the form flow index
+                currentlyDisplayedStepElement = steps[stepIndex].element;
+                updateProgressBar(stepIndex, stepIndex - 1); // Mark previous as completed
+            } else { // Navigating to sector details from left panel
+                currentlyDisplayedStepElement = steps[stepIndex].element; // This will be sectorDetailsStep
+                updateProgressBar(stepIndex); // Only mark step 4 active, don't complete previous form steps
+            }
+            currentlyDisplayedStepElement.classList.remove('hidden'); // Show new element
+        }
+
+        // Initial state
+        goToStep(0, true); // Ensure step 1 is shown initially as part of the form flow
+
+        // Show/Hide Password functionality
+        function togglePasswordVisibility(passwordInputId, toggleIconId) {
+            const passwordInput = document.getElementById(passwordInputId);
+            const toggleIcon = document.getElementById(toggleIconId);
+
+            if (passwordInput && toggleIcon) {
+                toggleIcon.addEventListener('click', function () {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    this.classList.toggle('fa-eye');
+                    this.classList.toggle('fa-eye-slash');
+                });
+            }
+        }
+        togglePasswordVisibility('password', 'togglePassword');
+        togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword');
+        togglePasswordVisibility('loginPassword', 'toggleLoginPassword');
+
+
+        // Password strength indicator
+        const passwordInput = document.getElementById('password');
+        const strengthMeter = document.getElementById('passwordStrength');
+        
+        passwordInput.addEventListener('input', function() {
+            const password = passwordInput.value;
+            let strength = 0;
+            
+            if (password.length >= 8) strength += 25;
+            if (/[A-Z]/.test(password)) strength += 25;
+            if (/[0-9]/.test(password)) strength += 25;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+            
+            strengthMeter.style.width = strength + '%';
+            
+            if (strength < 50) {
+                strengthMeter.style.background = '#e74c3c'; /* Red */
+            } else if (strength < 75) {
+                strengthMeter.style.background = '#f39c12'; /* Orange */
+            } else {
+                strengthMeter.style.background = '#2ecc71'; /* Green */
+            }
+        });
+        
+        // Form navigation
+        document.getElementById('nextBtn1').addEventListener('click', function() {
+            // Validate step 1
+            let isValid = true;
+            
+            // Check all required fields in the current step
+            const requiredFields = personalInfoStep.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!field.value) {
+                    isValid = false;
+                    field.style.borderColor = '#e74c3c';
+                } else {
+                    field.style.borderColor = '#ddd';
+                }
+            });
+            
+            // Special validation for phone number
+            const phone = document.getElementById('phone');
+            if (!phone.value.match(/^254[0-9]{9}$/)) {
+                isValid = false;
+                phone.style.borderColor = '#e74c3c';
+                // Using a custom alert for better UX, not native alert
+                showMessageBox('Please enter a valid Safaricom phone number (format: 2547XXXXXXXX)');
+            } else {
+                phone.style.borderColor = '#ddd';
+            }
+            
+            // Check gender selection
+            const genderSelected = document.querySelector('input[name="gender"]:checked');
+            if (!genderSelected) {
+                isValid = false;
+                showMessageBox('Please select your gender.');
+            }
+
+            // Check password match
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            if (password !== confirmPassword) {
+                isValid = false;
+                document.getElementById('password').style.borderColor = '#e74c3c';
+                document.getElementById('confirmPassword').style.borderColor = '#e74c3c';
+                showMessageBox('Passwords do not match!');
+            } else {
+                 document.getElementById('password').style.borderColor = '#ddd';
+                 document.getElementById('confirmPassword').style.borderColor = '#ddd';
+            }
+            
+            if (isValid) {
+                goToStep(1, true); // Go to Location Step
+            }
+        });
+        
+        document.getElementById('backBtn1').addEventListener('click', function() {
+            goToStep(0, true); // Go back to Personal Info Step
+        });
+        
+        document.getElementById('nextBtn2').addEventListener('click', function() {
+            // Validate step 2
+            const county = document.getElementById('county');
+            const constituency = document.getElementById('constituency');
+            const ward = document.getElementById('ward');
+            let isValid = true;
+            
+            if (!county.value) {
+                isValid = false;
+                county.style.borderColor = '#e74c3c';
+            } else {
+                county.style.borderColor = '#ddd';
+            }
+            
+            if (!constituency.value) {
+                isValid = false;
+                constituency.style.borderColor = '#e74c3c';
+            } else {
+                constituency.style.borderColor = '#ddd';
+            }
+            
+            if (!ward.value) {
+                isValid = false;
+                ward.style.borderColor = '#e74c3c';
+            } else {
+                ward.style.borderColor = '#ddd';
+            }
+            
+            if (isValid) {
+                goToStep(2, true); // Go to Payment Step
+            }
+        });
+        
+        document.getElementById('backBtn2').addEventListener('click', function() {
+            goToStep(1, true); // Go back to Location Step
+        });
+
+        // Payment method toggle
+        const mpesaOption = document.getElementById('mpesaOption');
+        const kcbOption = document.getElementById('kcbOption');
+        const mpesaMethodDetails = document.getElementById('mpesaMethod'); // Renamed
+        const kcbMethodDetails = document.getElementById('kcbMethod'); // Renamed
+
+        mpesaOption.addEventListener('click', function() {
+            document.getElementById('mpesa').checked = true;
+            mpesaMethodDetails.classList.add('active');
+            kcbMethodDetails.classList.remove('active');
+            // Make M-Pesa fields required when active
+            mpesaMethodDetails.querySelectorAll('[required]').forEach(field => field.required = true);
+            kcbMethodDetails.querySelectorAll('[required]').forEach(field => field.required = false);
+        });
+        
+        kcbOption.addEventListener('click', function() {
+            document.getElementById('kcb').checked = true;
+            kcbMethodDetails.classList.add('active');
+            mpesaMethodDetails.classList.remove('active');
+            // Make KCB fields required when active
+            kcbMethodDetails.querySelectorAll('[required]').forEach(field => field.required = true);
+            mpesaMethodDetails.querySelectorAll('[required]').forEach(field => field.required = false);
+        });
+
+        // Initialize required status for payment methods (M-Pesa is default)
+        document.addEventListener('DOMContentLoaded', () => {
+            mpesaMethodDetails.querySelectorAll('[required]').forEach(field => field.required = true);
+            kcbMethodDetails.querySelectorAll('[required]').forEach(field => field.required = false);
+        });
+
+        // Next button for Payment Step (to Sector Details)
+        document.getElementById('nextBtn3').addEventListener('click', function() {
+            // Validate step 3 (Payment)
+            const paymentMethodRadios = document.querySelectorAll('input[name="paymentMethod"]');
+            let selectedPaymentMethod = null;
+            paymentMethodRadios.forEach(radio => {
+                if (radio.checked) {
+                    selectedPaymentMethod = radio.value;
+                }
+            });
+
+            if (!selectedPaymentMethod) {
+                showMessageBox('Please select a payment method.');
+                return;
+            }
+
+            let isValid = true;
+            
+            if (selectedPaymentMethod === 'mpesa') {
+                const mpesaNumber = document.getElementById('mpesaNumber');
+                if (!mpesaNumber.value.match(/^254[0-9]{9}$/)) {
+                    isValid = false;
+                    mpesaNumber.style.borderColor = '#e74c3c';
+                    showMessageBox('Please enter a valid Safaricom M-Pesa number (format: 2547XXXXXXXX)');
+                } else {
+                    mpesaNumber.style.borderColor = '#ddd';
+                }
+            } else if (selectedPaymentMethod === 'kcb') {
+                const accountNumber = document.getElementById('accountNumber');
+                const accountName = document.getElementById('accountName');
+                const branch = document.getElementById('branch');
+
+                if (!accountNumber.value) {
+                    isValid = false;
+                    accountNumber.style.borderColor = '#e74c3c';
+                    showMessageBox('Please enter your KCB account number');
+                } else {
+                    accountNumber.style.borderColor = '#ddd';
+                }
+                if (!accountName.value) {
+                    isValid = false;
+                    accountName.style.borderColor = '#e74c3c';
+                    showMessageBox('Please enter your KCB account name');
+                } else {
+                    accountName.style.borderColor = '#ddd';
+                }
+                 if (!branch.value) {
+                    isValid = false;
+                    branch.style.borderColor = '#e74c3c';
+                    showMessageBox('Please enter your KCB branch name');
+                } else {
+                    branch.style.borderColor = '#ddd';
+                }
+            }
+            
+            if (isValid) {
+                // Load sector details based on previously selected sector
+                const selectedSectorValue = document.getElementById('sector').value;
+                displaySectorDetails(selectedSectorValue);
+                goToStep(3, true); // Go to Sector Details Step as part of form flow
+            }
+        });
+
+        // Back button for Sector Details Step (if accessed via form flow)
+        document.getElementById('backBtn4').addEventListener('click', function() { // New ID for this button
+            goToStep(currentActiveFormStepIndex, true); // Go back to the last step in the form flow
+        });
+        
+        // County, constituency, and ward relationship (simplified example)
+        document.getElementById('county').addEventListener('change', function() {
+            const county = this.value;
+            const constituencySelect = document.getElementById('constituency');
+            const wardSelect = document.getElementById('ward'); // Also clear ward when county changes
+            
+            // Clear existing options
+            constituencySelect.innerHTML = '<option value="">Select your constituency</option>';
+            wardSelect.innerHTML = '<option value="">Select your ward</option>'; // Clear ward options
+            
+            if (county === 'nairobi') {
+                addOption(constituencySelect, 'westlands', 'Westlands');
+                addOption(constituencySelect, 'dagoretti', 'Dagoretti');
+                addOption(constituencySelect, 'langata', 'Langata');
+                addOption(constituencySelect, 'embakasi-east', 'Embakasi East');
+                addOption(constituencySelect, 'mathare', 'Mathare');
+            } else if (county === 'mombasa') {
+                addOption(constituencySelect, 'mvita', 'Mvita');
+                addOption(constituencySelect, 'kisauni', 'Kisauni');
+                addOption(constituencySelect, 'likoni', 'Likoni');
+            } else if (county === 'kisumu') {
+                addOption(constituencySelect, 'kisumu-central', 'Kisumu Central');
+                addOption(constituencySelect, 'kisumu-east', 'Kisumu East');
+                addOption(constituencySelect, 'nyakach', 'Nyakach');
+            } else if (county === 'nakuru') {
+                addOption(constituencySelect, 'nakuru-town-east', 'Nakuru Town East');
+                addOption(constituencySelect, 'nakuru-town-west', 'Nakuru Town West');
+                addOption(constituencySelect, 'rongai', 'Rongai');
+            } else if (county === 'kiambu') {
+                addOption(constituencySelect, 'kiambu-town', 'Kiambu Town');
+                addOption(constituencySelect, 'limuru', 'Limuru');
+                addOption(constituencySelect, 'juja', 'Juja');
+            }
+            // Add more counties and constituencies as needed
+        });
+        
+        document.getElementById('constituency').addEventListener('change', function() {
+            const constituency = this.value;
+            const wardSelect = document.getElementById('ward');
+            
+            // Clear existing options
+            wardSelect.innerHTML = '<option value="">Select your ward</option>';
+            
+            if (constituency === 'westlands') {
+                addOption(wardSelect, 'kitisuru', 'Kitisuru');
+                addOption(wardSelect, 'parklands', 'Parklands');
+                addOption(wardSelect, 'kangemi', 'Kangemi');
+            } else if (constituency === 'dagoretti') {
+                addOption(wardSelect, 'kawangware', 'Kawangware');
+                addOption(wardSelect, 'mutuini', 'Mutuini');
+                addOption(wardSelect, 'waithaka', 'Waithaka');
+            } else if (constituency === 'langata') {
+                addOption(wardSelect, 'karen', 'Karen');
+                addOption(wardSelect, 'nyayo-highrise', 'Nyayo Highrise');
+                addOption(wardSelect, 'south-c', 'South C');
+            } else if (constituency === 'mvita') {
+                addOption(wardSelect, 'majengo', 'Majengo');
+                addOption(wardSelect, 'old-town', 'Old Town');
+                addOption(wardSelect, 'shimanzi', 'Shimanzi');
+            } else if (constituency === 'kisauni') {
+                addOption(wardSelect, 'bamburi', 'Bamburi');
+                addOption(wardSelect, 'mtongwe', 'Mtongwe');
+                addOption(wardSelect, 'kongowea', 'Kongowea');
+            }
+            // Add more constituencies and wards as needed
+        });
+        
+        function addOption(selectElement, value, text) {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = text;
+            selectElement.appendChild(option);
+        }
+
+        // Function to display sector details
+        function displaySectorDetails(sectorKey) {
+            const displayArea = document.getElementById('selectedSectorDisplay');
+            const sector = sectorData[sectorKey];
+
+            if (!sector) {
+                displayArea.innerHTML = '<p>No details available for this sector.</p>';
+                return;
+            }
+
+            let htmlContent = `
+                <h3 style="color:#0a5c36;">${sector.name}</h3>
+                <div class="sector-detail-section">
+                    <h3>What it Entails</h3>
+                    <p>${sector.entails}</p>
+                </div>
+                <div class="sector-detail-section">
+                    <h3>How it Works</h3>
+                    <p>${sector.howItWorks}</p>
+                </div>
+                <div class="sector-detail-section">
+                    <h3>Trainings Available</h3>
+                    <ul>
+            `;
+            sector.trainings.forEach(training => {
+                htmlContent += `<li>${training}</li>`;
+            });
+            htmlContent += `
+                    </ul>
+                </div>
+                <div class="sector-detail-section">
+                    <h3>Facts & Benefits</h3>
+                    <ul>
+            `;
+            sector.facts.forEach(fact => {
+                htmlContent += `<li><strong>Fact:</strong> ${fact}</li>`;
+            });
+            sector.benefits.forEach(benefit => {
+                htmlContent += `<li><strong>Benefit:</strong> ${benefit}</li>`;
+            });
+            htmlContent += `
+                    </ul>
+                </div>
+            `;
+            displayArea.innerHTML = htmlContent;
+        }
+        
+        // Form submission
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            // No validation for Step 4 needed before final submission, as it's informational.
+            
+            // In a real application, you would send all form data to a server here
+            showMessageBox('Application submitted successfully! You will receive a verification message shortly.', true);
+            
+            // Reset form (for demo purposes)
+            document.getElementById('signupForm').reset();
+            document.getElementById('county').value = '';
+            document.getElementById('constituency').innerHTML = '<option value="">Select your constituency</option>';
+            document.getElementById('ward').innerHTML = '<option value="">Select your ward</option>';
+            document.getElementById('mpesaNumber').value = '';
+            document.getElementById('accountNumber').value = '';
+            document.getElementById('accountName').value = '';
+            document.getElementById('branch').value = '';
+            strengthMeter.style.width = '0%';
+            
+            // Return to first step and reset progress bar
+            goToStep(0, true); // Reset to first step
+        });
+
+        // --- Login Modal Logic ---
+        const loginLink = document.getElementById('loginLink');
+        const loginModal = document.getElementById('loginModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const loginForm = document.getElementById('loginForm');
+
+        loginLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            loginModal.classList.add('active');
+        });
+
+        closeModalBtn.addEventListener('click', function() {
+            loginModal.classList.remove('active');
+            loginForm.reset(); // Reset form when closing modal
+        });
+
+        // Close modal if clicked outside content
+        loginModal.addEventListener('click', function(event) {
+            if (event.target === loginModal) {
+                loginModal.classList.remove('active');
+                loginForm.reset();
+            }
+        });
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (email && password) {
+                // In a real application, send these credentials to a server for authentication
+                showMessageBox(`Attempting to log in with Email: ${email}`, true);
+                loginModal.classList.remove('active');
+                loginForm.reset();
+            } else {
+                showMessageBox('Please enter both email and password.');
+            }
+        });
+
+        // Custom Message Box (replaces native alert)
+        function showMessageBox(message, isSuccess = false) {
+            const existingMessageBox = document.getElementById('customMessageBox');
+            if (existingMessageBox) {
+                existingMessageBox.remove();
+            }
+
+            const messageBox = document.createElement('div');
+            messageBox.id = 'customMessageBox';
+            messageBox.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 15px 30px;
+                background-color: ${isSuccess ? '#27ae60' : '#e74c3c'};
+                color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                z-index: 2000;
+                font-size: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                animation: fadeInOut 4s forwards;
+            `;
+            messageBox.innerHTML = `
+                <i class="${isSuccess ? 'fas fa-check-circle' : 'fas fa-exclamation-circle'}"></i>
+                <span>${message}</span>
+            `;
+
+            document.body.appendChild(messageBox);
+
+            // Add keyframes for animation dynamically if not already present
+            if (!document.querySelector('style#messageBoxAnimation')) {
+                const styleSheet = document.createElement('style');
+                styleSheet.id = 'messageBoxAnimation';
+                styleSheet.innerHTML = `
+                    @keyframes fadeInOut {
+                        0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+                        10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                        90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                        100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+                    }
+                `;
+                document.head.appendChild(styleSheet);
+            }
+
+            setTimeout(() => {
+                if (document.body.contains(messageBox)) {
+                    messageBox.remove();
+                }
+            }, 4000); // Remove after 4 seconds
+        }
+
+        // --- Left Panel Sector Buttons Logic ---
+        document.querySelectorAll('.sector-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const sectorKey = this.dataset.sectorKey;
+                displaySectorDetails(sectorKey); // Display details in the section
+                goToStep(3, false); // Navigate to step 4 (index 3) and indicate it's not part of form flow
+            });
+        });
+
+    </script>
+</body>
+</html>
